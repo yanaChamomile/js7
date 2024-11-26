@@ -1,7 +1,3 @@
-/*
-#gsKLAsNWM
-*Через Array.prototype. створити власний foreach, filter
-*/
 /*1*/
 function User(id, name, surname , email, phone){
     this.id = id;
@@ -167,11 +163,58 @@ auto.changeYear(2020);
 auto.addDriver({});
 console.log(auto);
 
-/*8
--створити класс/функцію конструктор попелюшка з полями ім'я, вік, розмір ноги. Створити масив з 10 попелюшок.
-Сторити об'єкт класу "принц" за допомоги класу який має поля ім'я, вік, туфелька яку він знайшов.
-    За допомоги циклу знайти яка попелюшка повинна бути з принцом.
-    Додатково, знайти необхідну попелюшку за допомоги функції масиву find та відповідного колбеку
-*/
+/*8*/
+class Cinderella {
+    constructor(name, age, footSize) {
+        this.name = name;
+        this.age = age;
+        this.footSize = footSize;
+    }}
+class Prince {
+    constructor(name, age, shoe) {
+        this.name = name;
+        this.age = age;
+        this.shoe = shoe;
+    }}
+const cinderellas =[
+    new Cinderella('Olya', 16, 35),
+    new Cinderella('Olena', 16, 34),
+    new Cinderella('Julia', 22, 37),
+    new Cinderella('Katja', 18, 36),
+    new Cinderella('Maria', 17, 35),
+    new Cinderella('Mila', 19, 38),
+    new Cinderella('Ira', 17, 39),
+    new Cinderella('Anya', 18, 35),
+    new Cinderella('Vira', 20, 37),
+    new Cinderella('Kira', 21, 36),
+];
+const prince = new Prince('name', 18, 36);
+for (const cinderella of cinderellas) {
+    if (cinderella.footSize === prince.shoe) {
+        prince.princess = cinderella;
+    }
+}
+const find = cinderellas.find(cinderella => cinderella.footSize === prince.shoe);
+prince.princess = find;
+console.log(prince.princess);
+/*9*/
+Array.prototype.myForEach = function (callback) {
+    const myArray = this;
+    for (const item of myArray) {
+        callback(item);
+    }};
+['monday', 22, 1].myForEach((day) => console.log(day));
 
+Array.prototype.myFilter = function (predicate) {
+    const arr = [];
+    for (const item of this) {
+        if (predicate(item)) {
+            arr.push(item);
+        }
+    }
+    return arr;
+};
+
+const result = cinderellas.myFilter((cinderella) => cinderella.age >= 18);
+console.log(result);
 
